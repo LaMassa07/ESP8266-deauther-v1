@@ -13,5 +13,11 @@ ESP8266 NodeMcu LoLin v3 DEAUTHER with OLED interface
 - download the `CODE` folder, open the `.ino` file
 - to change settings, go to the `A_config.h`
 
-## Upload settings
-- 
+## Board
+Add `https://arduino.esp8266.com/stable/package_esp8266com_index.json` in the Additional Boards Manager URLs, under "Preferences"
+Than, select your COM port and `NodeMCU 1.0 (ESP-12E module)`
+
+## Important upload settings
+Upload Speed: "115200"
+Flash Size: "4MB (FS:3MB OTA:~512KB)"
+Erase Flash: "All Flash Content"
