@@ -8,3 +8,7 @@ ESP8266 NodeMcu LoLin v3 DEAUTHER with OLED interface
 - 3x 220Ω resistors
 - RGB common K led
 <img width="1416" height="702" alt="image" src="https://github.com/user-attachments/assets/7fc2aff0-62d7-428f-89fd-22e3730b37b7" />
+
+# Code
+- download the `CODE` folder, open the `.ino` file
+- to change settings, go to the ``
