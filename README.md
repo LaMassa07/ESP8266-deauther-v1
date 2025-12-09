@@ -12,3 +12,6 @@ ESP8266 NodeMcu LoLin v3 DEAUTHER with OLED interface
 # Code
 - download the `CODE` folder, open the `.ino` file
 - to change settings, go to the `A_config.h`
+
+## Upload settings
+- 
