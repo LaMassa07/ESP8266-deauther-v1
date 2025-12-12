@@ -87,7 +87,7 @@ Additionally, you can print the PCB, using the `PCB_Gerber.zip` folder, with som
 
 ## 🙌 Credits
 Inspired by the work of <a href="https://github.com/spacehuhn">**@spacehuhn**</a>, creator of well-known Wi-Fi pentesting and deauther tools.
-
+<br>
 Find Me on:
 - [![Github](https://img.shields.io/badge/Github-LaMassa07-purple?style=for-the-badge&logo=github)](https://github.com/LaMassa07)
 
