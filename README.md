@@ -1,4 +1,4 @@
-# ESP8266 Deauther v1  <img src="https://img.shields.io/badge/ESP8266-NodeMCU-blue?logo=espressif&logoColor=white"/> <img src="https://img.shields.io/badge/Display-OLED%200.96%22-purple?logo=arduino&logoColor=white"/> <img src="https://img.shields.io/badge/Status-Experimental-orange"/>
+# ESP8266 Deauther v1  <img src="https://img.shields.io/badge/ESP8266-NodeMCU-blue?logo=espressif&logoColor=white"/> <img src="https://img.shields.io/badge/Display-OLED%200.96%22-purple?logo=arduino&logoColor=white"/> <img src="https://img.shields.io/badge/Status-Completed-Green"/>
 A compact WiFi gadget to perform a variety of actions to test 802.11 networks, using an ESP8266 board.
 
 
