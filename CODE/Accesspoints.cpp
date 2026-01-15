@@ -280,10 +280,7 @@ int Accesspoints::count() {
 }
 
 int Accesspoints::selected() {
-    int c = 0;
-
-    for (int i = 0; i < list->size(); i++) c += list->get(i).selected;
-    return c;
+    return countSelected(list, [this](int i) { return list->get(i).selected; });
 }
 
 bool Accesspoints::check(int num) {

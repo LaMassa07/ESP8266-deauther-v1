@@ -22,11 +22,7 @@ void SSIDs::load() {
 }
 
 void SSIDs::load(String filepath) {
-    String tmp = FILE_PATH;
-
-    FILE_PATH = filepath;
-    load();
-    FILE_PATH = tmp;
+    withTempFilePath(FILE_PATH, filepath, [this]() { load(); });
 }
 
 void SSIDs::removeAll() {
@@ -88,11 +84,7 @@ void SSIDs::save(bool force) {
 }
 
 void SSIDs::save(bool force, String filepath) {
-    String tmp = FILE_PATH;
-
-    FILE_PATH = filepath;
-    save(force);
-    FILE_PATH = tmp;
+    withTempFilePath(FILE_PATH, filepath, [this, force]() { save(force); });
 }
 
 void SSIDs::update() {

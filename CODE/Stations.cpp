@@ -18,12 +18,7 @@ void Stations::add(uint8_t* mac, int accesspointNum) {
 }
 
 int Stations::findStation(uint8_t* mac) {
-    int c = count();
-
-    for (int i = 0; i < c; i++) {
-        if (memcmp(getMac(i), mac, 6) == 0) return i;
-    }
-    return -1;
+    return findByMac(list, mac, [this](int i) { return getMac(i); });
 }
 
 void Stations::sort() {
@@ -279,13 +274,13 @@ void Stations::remove(String ssid) {
 }
 
 void Stations::selectAll() {
-    for (int i = 0; i < count(); i++) internal_select(i);
+    forEachItem([this]() { return count(); }, [this](int i) { internal_select(i); });
     prntln(ST_SELECTED_ALL);
     changed = true;
 }
 
 void Stations::deselectAll() {
-    for (int i = 0; i < count(); i++) internal_deselect(i);
+    forEachItem([this]() { return count(); }, [this](int i) { internal_deselect(i); });
     prntln(ST_DESELECTED_ALL);
     changed = true;
 }
@@ -295,11 +290,7 @@ int Stations::count() {
 }
 
 int Stations::selected() {
-    int num = 0;
-
-    for (int i = 0; i < count(); i++)
-        if (getSelected(i)) num++;
-    return num;
+    return countSelected(list, [this](int i) { return getSelected(i); });
 }
 
 bool Stations::check(int num) {
