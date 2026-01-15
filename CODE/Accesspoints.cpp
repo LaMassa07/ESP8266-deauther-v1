@@ -231,31 +231,25 @@ void Accesspoints::remove(int num) {
 }
 
 void Accesspoints::select(String ssid) {
-    for (int i = 0; i < list->size(); i++) {
-        if (getSSID(i).equalsIgnoreCase(ssid)) select(i);
-    }
+    forEachMatching(list, ssid, [this](int i) { return getSSID(i); }, [this](int i) { select(i); });
 }
 
 void Accesspoints::deselect(String ssid) {
-    for (int i = 0; i < list->size(); i++) {
-        if (getSSID(i).equalsIgnoreCase(ssid)) deselect(i);
-    }
+    forEachMatching(list, ssid, [this](int i) { return getSSID(i); }, [this](int i) { deselect(i); });
 }
 
 void Accesspoints::remove(String ssid) {
-    for (int i = 0; i < list->size(); i++) {
-        if (getSSID(i).equalsIgnoreCase(ssid)) remove(i);
-    }
+    forEachMatching(list, ssid, [this](int i) { return getSSID(i); }, [this](int i) { remove(i); });
 }
 
 void Accesspoints::selectAll() {
-    for (int i = 0; i < count(); i++) list->replace(i, AP{ list->get(i).id, true });
+    forEachItem([this]() { return count(); }, [this](int i) { internal_select(i); });
     prntln(AP_SELECTED_ALL);
     changed = true;
 }
 
 void Accesspoints::deselectAll() {
-    for (int i = 0; i < count(); i++) list->replace(i, AP{ list->get(i).id, false });
+    forEachItem([this]() { return count(); }, [this](int i) { internal_deselect(i); });
     prntln(AP_DESELECTED_ALL);
     changed = true;
 }
@@ -280,10 +274,7 @@ int Accesspoints::count() {
 }
 
 int Accesspoints::selected() {
-    int c = 0;
-
-    for (int i = 0; i < list->size(); i++) c += list->get(i).selected;
-    return c;
+    return countSelected(list, [this](int i) { return list->get(i).selected; });
 }
 
 bool Accesspoints::check(int num) {

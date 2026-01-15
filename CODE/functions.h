@@ -787,4 +787,49 @@ String formatBytes(size_t bytes) {
     else return String(bytes / 1024.0 / 1024.0 / 1024.0) + "GB";
 }
 
+// ===== HELPER FUNCTIONS FOR REDUCING CODE DUPLICATION ===== //
+// Template function to handle file path wrapper pattern
+template<typename Func>
+void withTempFilePath(String& filePath, String tempPath, Func operation) {
+    String tmp = filePath;
+    filePath = tempPath;
+    operation();
+    filePath = tmp;
+}
+
+// Helper function to count selected items in a list
+template<typename List, typename GetSelectedFunc>
+int countSelected(List* list, GetSelectedFunc getSelected) {
+    int num = 0;
+    for (int i = 0; i < list->size(); i++) {
+        if (getSelected(i)) num++;
+    }
+    return num;
+}
+
+// Helper function to apply operation to all items in a list
+template<typename CountFunc, typename OperationFunc>
+void forEachItem(CountFunc count, OperationFunc operation) {
+    for (int i = 0; i < count(); i++) {
+        operation(i);
+    }
+}
+
+// Helper function to find item by MAC address
+template<typename List, typename GetMacFunc>
+int findByMac(List* list, uint8_t* mac, GetMacFunc getMac) {
+    for (int i = 0; i < list->size(); i++) {
+        if (memcmp(getMac(i), mac, 6) == 0) return i;
+    }
+    return -1;
+}
+
+// Helper function to apply operation to items matching a string
+template<typename List, typename GetStringFunc, typename OperationFunc>
+void forEachMatching(List* list, String target, GetStringFunc getString, OperationFunc operation) {
+    for (int i = 0; i < list->size(); i++) {
+        if (getString(i).equalsIgnoreCase(target)) operation(i);
+    }
+}
+
 #endif // ifndef functions_h

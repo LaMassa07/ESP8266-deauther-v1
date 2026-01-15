@@ -24,11 +24,7 @@ void Names::load() {
 }
 
 void Names::load(String filepath) {
-    String tmp = FILE_PATH;
-
-    FILE_PATH = filepath;
-    load();
-    FILE_PATH = tmp;
+    withTempFilePath(FILE_PATH, filepath, [this]() { load(); });
 }
 
 void Names::save(bool force) {
@@ -88,11 +84,7 @@ void Names::save(bool force) {
 }
 
 void Names::save(bool force, String filepath) {
-    String tmp = FILE_PATH;
-
-    FILE_PATH = filepath;
-    save(force);
-    FILE_PATH = tmp;
+    withTempFilePath(FILE_PATH, filepath, [this, force]() { save(force); });
 }
 
 void Names::sort() {
@@ -117,11 +109,7 @@ bool Names::check(int num) {
 }
 
 int Names::findID(uint8_t* mac) {
-    for (int i = 0; i < list->size(); i++) {
-        if (memcmp(mac, list->get(i).mac, 6) == 0) return i;
-    }
-
-    return -1;
+    return findByMac(list, mac, [this](int i) { return list->get(i).mac; });
 }
 
 String Names::find(uint8_t* mac) {
@@ -331,16 +319,12 @@ void Names::deselect(String name) {
 }
 
 void Names::selectAll() {
-    int c = count();
-
-    for (int i = 0; i < c; i++) internal_select(i);
+    forEachItem([this]() { return count(); }, [this](int i) { internal_select(i); });
     prntln(N_SELECTED_ALL);
 }
 
 void Names::deselectAll() {
-    int c = count();
-
-    for (int i = 0; i < c; i++) internal_deselect(i);
+    forEachItem([this]() { return count(); }, [this](int i) { internal_deselect(i); });
     prntln(N_DESELECTED_ALL);
 }
 
@@ -416,11 +400,7 @@ int Names::count() {
 }
 
 int Names::selected() {
-    int num = 0;
-
-    for (int i = 0; i < count(); i++)
-        if (getSelected(i)) num++;
-    return num;
+    return countSelected(list, [this](int i) { return getSelected(i); });
 }
 
 int Names::stations() {
