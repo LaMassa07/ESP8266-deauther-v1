@@ -243,13 +243,13 @@ void Accesspoints::remove(String ssid) {
 }
 
 void Accesspoints::selectAll() {
-    for (int i = 0; i < count(); i++) list->replace(i, AP{ list->get(i).id, true });
+    forEachItem([this]() { return count(); }, [this](int i) { internal_select(i); });
     prntln(AP_SELECTED_ALL);
     changed = true;
 }
 
 void Accesspoints::deselectAll() {
-    for (int i = 0; i < count(); i++) list->replace(i, AP{ list->get(i).id, false });
+    forEachItem([this]() { return count(); }, [this](int i) { internal_deselect(i); });
     prntln(AP_DESELECTED_ALL);
     changed = true;
 }
