@@ -824,4 +824,12 @@ int findByMac(List* list, uint8_t* mac, GetMacFunc getMac) {
     return -1;
 }
 
+// Helper function to apply operation to items matching a string
+template<typename List, typename GetStringFunc, typename OperationFunc>
+void forEachMatching(List* list, String target, GetStringFunc getString, OperationFunc operation) {
+    for (int i = 0; i < list->size(); i++) {
+        if (getString(i).equalsIgnoreCase(target)) operation(i);
+    }
+}
+
 #endif // ifndef functions_h

@@ -231,21 +231,15 @@ void Accesspoints::remove(int num) {
 }
 
 void Accesspoints::select(String ssid) {
-    for (int i = 0; i < list->size(); i++) {
-        if (getSSID(i).equalsIgnoreCase(ssid)) select(i);
-    }
+    forEachMatching(list, ssid, [this](int i) { return getSSID(i); }, [this](int i) { select(i); });
 }
 
 void Accesspoints::deselect(String ssid) {
-    for (int i = 0; i < list->size(); i++) {
-        if (getSSID(i).equalsIgnoreCase(ssid)) deselect(i);
-    }
+    forEachMatching(list, ssid, [this](int i) { return getSSID(i); }, [this](int i) { deselect(i); });
 }
 
 void Accesspoints::remove(String ssid) {
-    for (int i = 0; i < list->size(); i++) {
-        if (getSSID(i).equalsIgnoreCase(ssid)) remove(i);
-    }
+    forEachMatching(list, ssid, [this](int i) { return getSSID(i); }, [this](int i) { remove(i); });
 }
 
 void Accesspoints::selectAll() {

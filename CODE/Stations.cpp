@@ -256,21 +256,15 @@ void Stations::remove(int num) {
 }
 
 void Stations::select(String ssid) {
-    for (int i = 0; i < list->size(); i++) {
-        if (getAPStr(i).equalsIgnoreCase(ssid)) select(i);
-    }
+    forEachMatching(list, ssid, [this](int i) { return getAPStr(i); }, [this](int i) { select(i); });
 }
 
 void Stations::deselect(String ssid) {
-    for (int i = 0; i < list->size(); i++) {
-        if (getAPStr(i).equalsIgnoreCase(ssid)) deselect(i);
-    }
+    forEachMatching(list, ssid, [this](int i) { return getAPStr(i); }, [this](int i) { deselect(i); });
 }
 
 void Stations::remove(String ssid) {
-    for (int i = 0; i < list->size(); i++) {
-        if (getAPStr(i).equalsIgnoreCase(ssid)) remove(i);
-    }
+    forEachMatching(list, ssid, [this](int i) { return getAPStr(i); }, [this](int i) { remove(i); });
 }
 
 void Stations::selectAll() {
